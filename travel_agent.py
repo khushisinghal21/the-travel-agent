@@ -3,9 +3,13 @@ import json
 from typing import TypedDict, Annotated
 from langgraph.graph import StateGraph, END
 from langchain_core.messages import HumanMessage
-from langchain_community.chat_models import ChatOllama
+from langchain_ollama import ChatOllama
+
+
+
 from langchain_community.utilities import GoogleSerperAPIWrapper
-from dotenv import load_dotenv
+from dotenv import load_dotenv # Updated import
+
 import os
 from agents import generate_itinerary, recommend_activities, fetch_useful_links, weather_forecaster, packing_list_generator, food_culture_recommender, chat_agent
 from utils_export import export_to_pdf
@@ -16,7 +20,7 @@ load_dotenv()
 # Initialize LLM
 st.set_page_config(page_title="AI Travel Planner", layout="wide")
 try:
-    llm = ChatOllama(model="llama3.2", base_url="http://localhost:11434")
+   llm = ChatOllama(model="llama3.2", base_url="http://localhost:11434")
 except Exception as e:
     st.error(f"LLM initialization failed: {str(e)}")
     st.stop()
